@@ -1,8 +1,8 @@
 import 'package:bloc_learn/login/cubit/login_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_learn/login/login.dart';
 import 'package:bloc_learn/sign_up/sign_up.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 
@@ -80,8 +80,7 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('loginForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<LoginCubit>().passwordChanged(password),
+          onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'password',
@@ -103,18 +102,17 @@ class _LoginButton extends StatelessWidget {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
             : ElevatedButton(
-          key: const Key('loginForm_continue_raisedButton'),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            primary: const Color(0xFFFFD600),
-          ),
-          onPressed: state.status.isValidated
-              ? () => context.read<LoginCubit>().logInWithCredentials()
-              : null,
-          child: const Text('LOGIN'),
-        );
+                key: const Key('loginForm_continue_raisedButton'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  primary: const Color(0xFFFFD600),
+                ),
+                onPressed:
+                    state.status.isValidated ? () => context.read<LoginCubit>().logInWithCredentials() : null,
+                child: const Text('LOGIN'),
+              );
       },
     );
   }

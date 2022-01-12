@@ -1,6 +1,6 @@
+import 'package:bloc_learn/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_learn/app/app.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,8 +28,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if(user.photo != null)
-              CircleAvatar(child: Image.network(user.photo!)),
+            if (user.photo != null) CircleAvatar(child: Image.network(user.photo!)),
             const SizedBox(height: 4),
             Text(user.email ?? '', style: textTheme.headline6),
             const SizedBox(height: 4),

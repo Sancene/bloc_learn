@@ -1,7 +1,7 @@
 import 'package:bloc_learn/sign_up/cubit/sign_up_cubit.dart';
+import 'package:bloc_learn/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_learn/sign_up/sign_up.dart';
 import 'package:formz/formz.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -69,8 +69,7 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<SignUpCubit>().passwordChanged(password),
+          onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'password',
@@ -88,21 +87,17 @@ class _ConfirmPasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) =>
-      previous.password != current.password ||
-          previous.confirmedPassword != current.confirmedPassword,
+          previous.password != current.password || previous.confirmedPassword != current.confirmedPassword,
       builder: (context, state) {
         return TextField(
           key: const Key('signUpForm_confirmedPasswordInput_textField'),
-          onChanged: (confirmPassword) => context
-              .read<SignUpCubit>()
-              .confirmedPasswordChanged(confirmPassword),
+          onChanged: (confirmPassword) =>
+              context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'confirm password',
             helperText: '',
-            errorText: state.confirmedPassword.invalid
-                ? 'passwords do not match'
-                : null,
+            errorText: state.confirmedPassword.invalid ? 'passwords do not match' : null,
           ),
         );
       },
@@ -119,18 +114,17 @@ class _SignUpButton extends StatelessWidget {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
             : ElevatedButton(
-          key: const Key('signUpForm_continue_raisedButton'),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            primary: Colors.orangeAccent,
-          ),
-          onPressed: state.status.isValidated
-              ? () => context.read<SignUpCubit>().signUpFormSubmitted()
-              : null,
-          child: const Text('SIGN UP'),
-        );
+                key: const Key('signUpForm_continue_raisedButton'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  primary: Colors.orangeAccent,
+                ),
+                onPressed:
+                    state.status.isValidated ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
+                child: const Text('SIGN UP'),
+              );
       },
     );
   }
