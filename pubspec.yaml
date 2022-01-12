@@ -15,11 +15,14 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
   font_awesome_flutter: ^9.2.0
   form_inputs:
     path: packages/form_inputs
   formz: ^0.4.1
   google_fonts: ^2.2.0
+  intl: ^0.17.0
   meta: ^1.7.0
   very_good_analysis: ^2.4.0
 
@@ -33,3 +36,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+flutter_intl:
+  enabled: true

@@ -1,3 +1,4 @@
+import 'package:bloc_learn/generated/l10n.dart';
 import 'package:bloc_learn/sign_up/cubit/sign_up_cubit.dart';
 import 'package:bloc_learn/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            labelText: S.of(context).email,
             helperText: '',
             errorText: state.email.invalid ? 'invalid email' : null,
           ),
@@ -72,7 +73,7 @@ class _PasswordInput extends StatelessWidget {
           onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            labelText: S.of(context).password,
             helperText: '',
             errorText: state.password.invalid ? 'invalid password' : null,
           ),
@@ -95,7 +96,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
               context.read<SignUpCubit>().confirmedPasswordChanged(confirmPassword),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'confirm password',
+            labelText: S.of(context).confirmPassword,
             helperText: '',
             errorText: state.confirmedPassword.invalid ? 'passwords do not match' : null,
           ),
@@ -123,7 +124,7 @@ class _SignUpButton extends StatelessWidget {
                 ),
                 onPressed:
                     state.status.isValidated ? () => context.read<SignUpCubit>().signUpFormSubmitted() : null,
-                child: const Text('SIGN UP'),
+                child: Text(S.of(context).signUp.toUpperCase()),
               );
       },
     );

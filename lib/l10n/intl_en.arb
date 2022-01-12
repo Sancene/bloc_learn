@@ -1,0 +1,10 @@
+{
+  "login": "Login",
+  "signInWithGoogle": "sign in with google",
+  "createAccount": "create account",
+  "changeLocale": "change language",
+  "email": "email",
+  "password": "password",
+  "signUp": "Sign Up",
+  "confirmPassword": "confirm password"
+}

@@ -1,4 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:bloc_learn/app/locale_bloc/locale_bloc.dart';
+import 'package:bloc_learn/generated/l10n.dart';
 import 'package:bloc_learn/login/cubit/login_cubit.dart';
 import 'package:bloc_learn/login/login.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,17 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(
+        title: Text(S.of(context).login),
+        actions: [
+          TextButton(
+            onPressed: () => BlocProvider.of<LocaleBloc>(context)
+              ..add(LoadLocale()),
+            child: Text(S.of(context).changeLocale,
+                style: const TextStyle(color: Colors.white, fontSize: 20)),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: BlocProvider(

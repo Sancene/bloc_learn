@@ -1,0 +1,10 @@
+{
+  "login": "Войти",
+  "signInWithGoogle": "войти через Google",
+  "createAccount": "Создать аккаунт",
+  "changeLocale": "смена языка",
+  "email": "почта",
+  "password": "пароль",
+  "signUp": "Регистрация",
+  "confirmPassword": "подтвердите пароль"
+}

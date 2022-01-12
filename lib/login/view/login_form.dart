@@ -1,3 +1,4 @@
+import 'package:bloc_learn/generated/l10n.dart';
 import 'package:bloc_learn/login/cubit/login_cubit.dart';
 import 'package:bloc_learn/login/login.dart';
 import 'package:bloc_learn/sign_up/sign_up.dart';
@@ -62,7 +63,7 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            labelText: 'email',
+            labelText: S.of(context).email,
             helperText: '',
             errorText: state.email.invalid ? 'invalid email' : null,
           ),
@@ -80,10 +81,11 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('loginForm_passwordInput_textField'),
-          onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
+          onChanged: (password) =>
+              context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            labelText: S.of(context).password,
             helperText: '',
             errorText: state.password.invalid ? 'invalid password' : null,
           ),
@@ -109,9 +111,10 @@ class _LoginButton extends StatelessWidget {
                   ),
                   primary: const Color(0xFFFFD600),
                 ),
-                onPressed:
-                    state.status.isValidated ? () => context.read<LoginCubit>().logInWithCredentials() : null,
-                child: const Text('LOGIN'),
+                onPressed: state.status.isValidated
+                    ? () => context.read<LoginCubit>().logInWithCredentials()
+                    : null,
+                child: Text(S.of(context).login.toUpperCase()),
               );
       },
     );
@@ -124,8 +127,8 @@ class _GoogleLoginButton extends StatelessWidget {
     final theme = Theme.of(context);
     return ElevatedButton.icon(
       key: const Key('loginForm_googleLogin_raisedButton'),
-      label: const Text(
-        'SIGN IN WITH GOOGLE',
+      label: Text(
+        S.of(context).signInWithGoogle.toUpperCase(),
         style: TextStyle(color: Colors.white),
       ),
       style: ElevatedButton.styleFrom(
@@ -148,7 +151,7 @@ class _SignUpButton extends StatelessWidget {
       key: const Key('loginForm_createAccount_flatButton'),
       onPressed: () => Navigator.of(context).push<void>(SignUpPage.route()),
       child: Text(
-        'CREATE ACCOUNT',
+        S.of(context).createAccount.toUpperCase(),
         style: TextStyle(color: theme.primaryColor),
       ),
     );
