@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "547295421913",
+    "project_id": "bloclearn-f893b",
+    "storage_bucket": "bloclearn-f893b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547295421913:android:5a848981e47178147da5c8",
+        "android_client_info": {
+          "package_name": "com.bloc_learn.bloc_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547295421913-4posk3pbgb17lv14r5c5snrn8m24bjl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bloc_learn.bloc_learn",
+            "certificate_hash": "7497d41be99d7f2333dec91089f5f31d93337b8a"
+          }
+        },
+        {
+          "client_id": "547295421913-ca69l2npoag63i1m544jovqidf6j00sg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcwwlhgbOgKZkWKOhznMSGItTO1AZcBEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547295421913-ca69l2npoag63i1m544jovqidf6j00sg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
