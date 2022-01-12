@@ -11,7 +11,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
-    print(user.photo);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
