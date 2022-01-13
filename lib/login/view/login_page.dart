@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_learn/app/locale_bloc/locale_bloc.dart';
+import 'package:bloc_learn/app/theme_cubit/theme_cubit.dart';
 import 'package:bloc_learn/generated/l10n.dart';
 import 'package:bloc_learn/login/cubit/login_cubit.dart';
 import 'package:bloc_learn/login/login.dart';
@@ -18,10 +19,19 @@ class LoginPage extends StatelessWidget {
         title: Text(S.of(context).login),
         actions: [
           TextButton(
-            onPressed: () => BlocProvider.of<LocaleBloc>(context)
-              ..add(LoadLocale()),
-            child: Text(S.of(context).changeLocale,
-                style: const TextStyle(color: Colors.white, fontSize: 20)),
+            onPressed: () =>
+                BlocProvider.of<LocaleBloc>(context)..add(LoadLocale()),
+            child: Text(
+              S.of(context).changeLocale,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+          TextButton(
+            onPressed: () => BlocProvider.of<ThemeCubit>(context).SwitchTheme(),
+            child: const Text(
+              'Theme',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
         ],
       ),

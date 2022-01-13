@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_learn/app/app.dart';
 import 'package:bloc_learn/app/locale_bloc/locale_bloc.dart';
+import 'package:bloc_learn/app/theme_cubit/theme_cubit.dart';
 import 'package:bloc_learn/theme.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
@@ -38,24 +39,31 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LocaleBloc>(
-      create: (localeBlocContext) => LocaleBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LocaleBloc>(create: (localeBlocContext) => LocaleBloc()),
+        BlocProvider<ThemeCubit>(create: (themeCubitContext) => ThemeCubit()),
+      ],
       child: BlocBuilder<LocaleBloc, LocaleState>(
-        builder: (context, state) {
-          return MaterialApp(
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            locale: state.locale,
-            supportedLocales: S.delegate.supportedLocales,
-            theme: theme,
-            home: FlowBuilder<AppStatus>(
-              state: context.select((AppBloc bloc) => bloc.state.status),
-              onGeneratePages: onGenerateAppViewPages,
-            ),
+        builder: (context, localeState) {
+          return BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              return MaterialApp(
+                localizationsDelegates: [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                locale: localeState.locale,
+                supportedLocales: S.delegate.supportedLocales,
+                theme: themeState.theme,
+                home: FlowBuilder<AppStatus>(
+                  state: context.select((AppBloc bloc) => bloc.state.status),
+                  onGeneratePages: onGenerateAppViewPages,
+                ),
+              );
+            },
           );
         },
       ),
