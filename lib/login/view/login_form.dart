@@ -81,8 +81,7 @@ class _PasswordInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           key: const Key('loginForm_passwordInput_textField'),
-          onChanged: (password) =>
-              context.read<LoginCubit>().passwordChanged(password),
+          onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
           obscureText: true,
           decoration: InputDecoration(
             labelText: S.of(context).password,
@@ -111,9 +110,8 @@ class _LoginButton extends StatelessWidget {
                   ),
                   primary: const Color(0xFFFFD600),
                 ),
-                onPressed: state.status.isValidated
-                    ? () => context.read<LoginCubit>().logInWithCredentials()
-                    : null,
+                onPressed:
+                    state.status.isValidated ? () => context.read<LoginCubit>().logInWithCredentials() : null,
                 child: Text(S.of(context).login.toUpperCase()),
               );
       },

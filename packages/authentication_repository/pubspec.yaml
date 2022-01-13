@@ -12,6 +12,7 @@ dependencies:
   equatable: ^2.0.3
   firebase_auth: ^3.3.5
   firebase_core: ^1.11.0
+  firebase_storage: ^10.2.5
   flutter:
     sdk: flutter
   google_sign_in: ^5.2.2

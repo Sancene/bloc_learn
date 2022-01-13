@@ -19,8 +19,7 @@ class LoginPage extends StatelessWidget {
         title: Text(S.of(context).login),
         actions: [
           TextButton(
-            onPressed: () =>
-                BlocProvider.of<LocaleBloc>(context)..add(LoadLocale()),
+            onPressed: () => BlocProvider.of<LocaleBloc>(context)..add(LoadLocale()),
             child: Text(
               S.of(context).changeLocale,
               style: const TextStyle(color: Colors.white, fontSize: 20),

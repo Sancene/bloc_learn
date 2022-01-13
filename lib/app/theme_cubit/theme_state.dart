@@ -5,8 +5,7 @@ class ThemeState extends Equatable {
 
   ThemeState({required this.theme});
 
-  factory ThemeState.initial() =>
-      ThemeState(theme: themes[AppTheme.lightTheme]!);
+  factory ThemeState.initial() => ThemeState(theme: themes[AppTheme.lightTheme]!);
 
   ThemeState copyWith({
     ThemeData? theme,
