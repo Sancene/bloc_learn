@@ -26,6 +26,8 @@ dependencies:
   intl: ^0.17.0
   meta: ^1.7.0
   very_good_analysis: ^2.4.0
+  yandex_mapkit: ^2.0.1
+  google_maps_flutter: ^2.1.1
 
 dev_dependencies:
 #  bloc_test: ^9.0.2

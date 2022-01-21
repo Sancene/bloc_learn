@@ -1,6 +1,8 @@
 import 'package:bloc_learn/app/app.dart';
+import 'package:bloc_learn/map/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class HomePage extends StatelessWidget {
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(user.email ?? ''),
         actions: <Widget>[
           IconButton(
             key: const Key('homePage_logout_iconButton'),
@@ -22,19 +24,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Align(
-        alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (user.photo != null) CircleAvatar(child: Image.network(user.photo!)),
-            const SizedBox(height: 4),
-            Text(user.email ?? '', style: textTheme.headline6),
-            const SizedBox(height: 4),
-            Text(user.name ?? '', style: textTheme.headline5),
-          ],
-        ),
-      ),
+      body: ClusterizedPlacemarkCollectionPage(),
     );
   }
 }
