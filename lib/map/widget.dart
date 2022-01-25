@@ -126,40 +126,36 @@ class _ClusterizedPlacemarkCollectionExampleState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
-            child: YandexMap(
-          mapObjects: mapObjects,
-          logoAlignment: const MapAlignment(
+          child: YandexMap(
+            mapObjects: mapObjects,
+            logoAlignment: const MapAlignment(
               horizontal: HorizontalAlignment.left,
-              vertical: VerticalAlignment.bottom),
-          onMapCreated: (YandexMapController yandexMapController) async {
-            controller = yandexMapController;
+              vertical: VerticalAlignment.bottom,
+            ),
+            onMapCreated: (YandexMapController yandexMapController) async {
+              controller = yandexMapController;
 
-            setState(() {
-              points.forEach((element) {
-                mapObjects.add(
-                  Placemark(
-                    mapId: MapObjectId('placemark_new'),
-                    point: element.coordinates,
-                  ),
-                );
+              setState(() {
+                points.forEach((element) {
+                  mapObjects.add(
+                    Placemark(
+                      mapId: MapObjectId('placemark_new'),
+                      point: element.coordinates,
+                    ),
+                  );
+                });
               });
-            });
-            await controller.moveCamera(CameraUpdate.zoomTo(8));
-            await controller.moveCamera(
-              CameraUpdate.newCameraPosition(
-                const CameraPosition(
-                  target: Point(latitude: 55.756, longitude: 37.618),
+              await controller.moveCamera(CameraUpdate.zoomTo(8));
+              await controller.moveCamera(
+                CameraUpdate.newCameraPosition(
+                  const CameraPosition(
+                    target: Point(latitude: 55.756, longitude: 37.618),
+                  ),
                 ),
-              ),
-            );
-            final cameraPosition = await controller.getCameraPosition();
-            final minZoom = await controller.getMinZoom();
-            final maxZoom = await controller.getMaxZoom();
-
-            print('Camera position: $cameraPosition');
-            print('Min zoom: $minZoom, Max zoom: $maxZoom');
-          },
-        )),
+              );
+            },
+          ),
+        ),
         const SizedBox(height: 20),
         Container(
           child: SingleChildScrollView(
@@ -210,8 +206,8 @@ class _ClusterizedPlacemarkCollectionExampleState
                                 animation: animation,
                               );
                             },
-                            placemarks: List<Placemark>.generate(
-                                points.length, (i) {
+                            placemarks:
+                                List<Placemark>.generate(points.length, (i) {
                               return Placemark(
                                 onTap: (placemark, point) {
                                   showModalBottomSheet<void>(
@@ -249,52 +245,7 @@ class _ClusterizedPlacemarkCollectionExampleState
                                       scale: 1),
                                 ),
                               );
-                            }
-                                //     List<Placemark>.generate(kPlacemarkCount, (i) {
-                                //   return Placemark(
-                                //     onTap: (placemark, point) {
-                                //       showModalBottomSheet<void>(
-                                //         context: context,
-                                //         builder: (BuildContext context) {
-                                //           return Container(
-                                //             height: 200,
-                                //             color: Colors.amber,
-                                //             child: Center(
-                                //               child: Column(
-                                //                 mainAxisAlignment:
-                                //                     MainAxisAlignment.center,
-                                //                 mainAxisSize: MainAxisSize.min,
-                                //                 children: <Widget>[
-                                //                   const Text('Modal BottomSheet'),
-                                //                   ElevatedButton(
-                                //                     child: const Text(
-                                //                         'Close BottomSheet'),
-                                //                     onPressed: () =>
-                                //                         Navigator.pop(context),
-                                //                   )
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //           );
-                                //         },
-                                //       );
-                                //    },
-                                //     mapId: MapObjectId('placemark_$i'),
-                                //     point: Point(
-                                //         latitude: 55.756 + _randomDouble(),
-                                //         longitude: 37.618 + _randomDouble()),
-                                //     icon: PlacemarkIcon.single(
-                                //       PlacemarkIconStyle(
-                                //           image: BitmapDescriptor.fromAssetImage(
-                                //               'assets/place.png'),
-                                //           scale: 1),
-                                //     ),
-                                //   );
-                                // }),
-                                // onTap: (ClusterizedPlacemarkCollection self,
-                                //         Point point) =>
-                                //     print('Tapped Cluster?? me at $point'),
-                                ),
+                            }),
                           );
 
                           setState(() {
