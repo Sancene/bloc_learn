@@ -7,8 +7,9 @@ class MapPlace {
   final String openingHours;
   final String name;
   final String address;
+  final int id;
 
-  MapPlace(this.coordinates, this.openingHours, this.name, this.address);
+  MapPlace(this.coordinates, this.openingHours, this.name, this.address, this.id);
 }
 
 double _randomDouble() {
@@ -25,6 +26,7 @@ final List<MapPlace> testData = [
     "8:00-17:45",
     "Boston cafee",
     "Улица Пушкина, Дом Колотушкина",
+    1,
   ),
   MapPlace(
     Point(
@@ -34,6 +36,7 @@ final List<MapPlace> testData = [
     "9:00-12:45",
     "Boston arolfer",
     "Улица Пушкина, Дом Колотушкина",
+    2,
   ),
   MapPlace(
     Point(
@@ -43,6 +46,7 @@ final List<MapPlace> testData = [
     "8:15-17:35",
     "American cafee",
     "Улица Пушкина, Дом Колотушкина",
+    3,
   ),
   MapPlace(
     Point(
@@ -52,6 +56,7 @@ final List<MapPlace> testData = [
     "8:00-17:45",
     "Mega cafee",
     "Улица Пушкина, Дом Колотушкина",
+    4,
   ),
   MapPlace(
     Point(
@@ -61,5 +66,6 @@ final List<MapPlace> testData = [
     "8:00-17:45",
     "Boston cafee",
     "Улица Пушкина, Дом Колотушкина",
+    5,
   ),
 ];

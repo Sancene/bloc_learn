@@ -5,6 +5,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
+import 'entities/map_place.dart';
+
 abstract class MapPage extends StatelessWidget {
   const MapPage(this.title);
 
@@ -54,12 +56,15 @@ class _ClusterizedPlacemarkCollectionExampleState
 
   final List<MapObject> mapObjects = [];
 
+  final List<MapPlace> points = testData;
   final int kPlacemarkCount = 500;
   final Random seed = Random();
   final MapObjectId clusterizedPlacemarkCollectionId =
       MapObjectId('clusterized_placemark_collection');
   final MapObjectId largeClusterizedPlacemarkCollectionId =
       MapObjectId('large_clusterized_placemark_collection');
+  final MapObjectId testDataCollectionId =
+      MapObjectId('test_data_placemark_collection');
 
   Future<Uint8List> _buildClusterAppearance(Cluster cluster) async {
     final recorder = PictureRecorder();
@@ -123,16 +128,30 @@ class _ClusterizedPlacemarkCollectionExampleState
         Expanded(
             child: YandexMap(
           mapObjects: mapObjects,
-          logoAlignment: MapAlignment(
+          logoAlignment: const MapAlignment(
               horizontal: HorizontalAlignment.left,
               vertical: VerticalAlignment.bottom),
           onMapCreated: (YandexMapController yandexMapController) async {
             controller = yandexMapController;
 
-            controller.addListener(() {});
-            controller.moveCamera(CameraUpdate.zoomTo(8));
-            controller.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                target: Point(latitude: 55.756, longitude: 37.618))));
+            setState(() {
+              points.forEach((element) {
+                mapObjects.add(
+                  Placemark(
+                    mapId: MapObjectId('placemark_new'),
+                    point: element.coordinates,
+                  ),
+                );
+              });
+            });
+            await controller.moveCamera(CameraUpdate.zoomTo(8));
+            await controller.moveCamera(
+              CameraUpdate.newCameraPosition(
+                const CameraPosition(
+                  target: Point(latitude: 55.756, longitude: 37.618),
+                ),
+              ),
+            );
             final cameraPosition = await controller.getCameraPosition();
             final minZoom = await controller.getMinZoom();
             final maxZoom = await controller.getMaxZoom();
@@ -191,8 +210,8 @@ class _ClusterizedPlacemarkCollectionExampleState
                                 animation: animation,
                               );
                             },
-                            placemarks:
-                                List<Placemark>.generate(kPlacemarkCount, (i) {
+                            placemarks: List<Placemark>.generate(
+                                points.length, (i) {
                               return Placemark(
                                 onTap: (placemark, point) {
                                   showModalBottomSheet<void>(
@@ -207,7 +226,7 @@ class _ClusterizedPlacemarkCollectionExampleState
                                                 MainAxisAlignment.center,
                                             mainAxisSize: MainAxisSize.min,
                                             children: <Widget>[
-                                              const Text('Modal BottomSheet'),
+                                              Text(points[i].name),
                                               ElevatedButton(
                                                 child: const Text(
                                                     'Close BottomSheet'),
@@ -222,9 +241,7 @@ class _ClusterizedPlacemarkCollectionExampleState
                                   );
                                 },
                                 mapId: MapObjectId('placemark_$i'),
-                                point: Point(
-                                    latitude: 55.756 + _randomDouble(),
-                                    longitude: 37.618 + _randomDouble()),
+                                point: points[i].coordinates,
                                 icon: PlacemarkIcon.single(
                                   PlacemarkIconStyle(
                                       image: BitmapDescriptor.fromAssetImage(
@@ -232,10 +249,52 @@ class _ClusterizedPlacemarkCollectionExampleState
                                       scale: 1),
                                 ),
                               );
-                            }),
-                            onTap: (ClusterizedPlacemarkCollection self,
-                                    Point point) =>
-                                print('Tapped Cluster?? me at $point'),
+                            }
+                                //     List<Placemark>.generate(kPlacemarkCount, (i) {
+                                //   return Placemark(
+                                //     onTap: (placemark, point) {
+                                //       showModalBottomSheet<void>(
+                                //         context: context,
+                                //         builder: (BuildContext context) {
+                                //           return Container(
+                                //             height: 200,
+                                //             color: Colors.amber,
+                                //             child: Center(
+                                //               child: Column(
+                                //                 mainAxisAlignment:
+                                //                     MainAxisAlignment.center,
+                                //                 mainAxisSize: MainAxisSize.min,
+                                //                 children: <Widget>[
+                                //                   const Text('Modal BottomSheet'),
+                                //                   ElevatedButton(
+                                //                     child: const Text(
+                                //                         'Close BottomSheet'),
+                                //                     onPressed: () =>
+                                //                         Navigator.pop(context),
+                                //                   )
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           );
+                                //         },
+                                //       );
+                                //    },
+                                //     mapId: MapObjectId('placemark_$i'),
+                                //     point: Point(
+                                //         latitude: 55.756 + _randomDouble(),
+                                //         longitude: 37.618 + _randomDouble()),
+                                //     icon: PlacemarkIcon.single(
+                                //       PlacemarkIconStyle(
+                                //           image: BitmapDescriptor.fromAssetImage(
+                                //               'assets/place.png'),
+                                //           scale: 1),
+                                //     ),
+                                //   );
+                                // }),
+                                // onTap: (ClusterizedPlacemarkCollection self,
+                                //         Point point) =>
+                                //     print('Tapped Cluster?? me at $point'),
+                                ),
                           );
 
                           setState(() {
